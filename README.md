@@ -1,4 +1,5 @@
 Below is a brief overview of each project...
+
 Project 1: LC-4000 Datapath
 - Designed a datapath in Circuit Sim to implement a custom instruction set architecture
 - Implemented a microcontroller unit for the processor
