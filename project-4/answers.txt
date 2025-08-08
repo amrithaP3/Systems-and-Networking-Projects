@@ -1,0 +1,28 @@
+CS 2200 Fall 2024
+Project 4
+
+Name: Amritha Pramod
+GT Username: apramod7
+
+Problem 1B (FCFS Scheduler)
+----------
+
+The total execution times for 1, 2, and 4 CPUs were around 70 seconds, 43 seconds, and 37 seconds respectively. This indicates that as the number of CPUs running concurrently increase, total execution time decreases. However, it does not seem to decrease in a linear fashion but rather more rapidly in the transition between 1 and 2 CPUs and then by a less significant amount between 2 and 4 CPUS–and also between 3 and 4 CPUs because I tested that out too. This reflects the idea of diminishing returns in parallel processing where the huge benefits are seen in the initial addition of multiple processors and decreases as more and more are added. In fact with having to manage more threads, eventually the overhead associated with that could cancel out the benefits of parallelism in terms of speed-up, thus explaining why the execution time does not increase linearly–eventually a line is reached.
+
+
+Problem 2B (Round-Robin)
+----------
+
+Across the different time slices (800 ms, 600 ms, 400 ms, 200 ms) I ran the RR tests with, I saw that the total execution time stayed the same at around 67.9 seconds even as the other stats changed. This makes sense since we're running the tests each time on a single CPU with time slice being the only thing that is changed. In terms of the relationship between total waiting time and time slice length, as the time slice grew smaller, the total waiting time decreased going from around 317 seconds with a time slice of 800 ms to around 284 seconds with a time slice of 200 ms. This is reflective of the idea that a shorter time slice enables a processor to rotate through processes more quickly since each process only has a short amount of time allotted to do its work. As such, processes also spend less time waiting before it gets its turn on the processor. In real OS, the shortest time slice is not usually the best option because shorter time slices result in a lot more context switches (something also reflected in the stats I saw) which consume CPU resources and result in both a lot of overhead and a decrease in system efficiency. In fact, if a CPU spends more time switching between processes rather than actually executing those processes and allowing them to get meaningful work done, performance will be slowed and the system will be rendered even more inefficient.
+
+
+Problem 3B (Preemptive Priority)
+----------
+
+Operating systems can mitigate starvation among processes with lower priority by utilizing the concept of aging. This technique takes into account how long the process has been waiting in the ready queue to calculate its functional priority. In terms of functional priority, the lower the value for a certain process, the higher its priority in terms of implementing this algorithm. This makes sure that lower priority processes that have been waiting for its turn on the CPU gain enough priority to be scheduled, in accordance with their age. As such, these processes will avoid being starved indefinitely.
+
+
+Problem 4 (The Priority Inversion Problem)
+---------
+
+In this case, we would need to keep track of dependencies between processes to ensure that in the case of a high priority process depending on a low-priority process, the former is not starved by the latter not being scheduled. A possible way to do this is through priority inheritance where the priority of the lower priority process is temporarily boosted to match that of the higher priority process. This will ensure that the lower priority process can quickly complete its work, allowing the high priority process to execute while the lower priority process's priority is restored to its original level before it was boosted.
